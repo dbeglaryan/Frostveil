@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frostveil Dashboard</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<!-- Top bar -->
+<header id="topbar">
+  <div class="topbar-left">
+    <span class="logo">FROSTVEIL</span>
+    <span class="version">v2.0</span>
+  </div>
+  <div class="topbar-center">
+    <input type="text" id="global-search" placeholder="Search artifacts, URLs, credentials..." autocomplete="off">
+  </div>
+  <div class="topbar-right">
+    <span id="risk-badge" class="badge">--</span>
+    <span id="artifact-count" class="stat">0 artifacts</span>
+  </div>
+</header>
+
+<!-- Sidebar navigation -->
+<nav id="sidebar">
+  <a href="#" class="nav-item active" data-view="overview">
+    <span class="nav-icon">[#]</span> Overview
+  </a>
+  <a href="#" class="nav-item" data-view="timeline">
+    <span class="nav-icon">[~]</span> Timeline
+  </a>
+  <a href="#" class="nav-item" data-view="credentials">
+    <span class="nav-icon">[*]</span> Credentials
+  </a>
+  <a href="#" class="nav-item" data-view="cookies">
+    <span class="nav-icon">[o]</span> Cookies
+  </a>
+  <a href="#" class="nav-item" data-view="history">
+    <span class="nav-icon">[>]</span> History
+  </a>
+  <a href="#" class="nav-item" data-view="downloads">
+    <span class="nav-icon">[v]</span> Downloads
+  </a>
+  <a href="#" class="nav-item" data-view="ioc">
+    <span class="nav-icon">[!]</span> Threats / IOC
+  </a>
+  <a href="#" class="nav-item" data-view="extensions">
+    <span class="nav-icon">[+]</span> Extensions
+  </a>
+  <a href="#" class="nav-item" data-view="network">
+    <span class="nav-icon">[@]</span> Network
+  </a>
+  <a href="#" class="nav-item" data-view="sessions">
+    <span class="nav-icon">[=]</span> Sessions
+  </a>
+  <a href="#" class="nav-item" data-view="autofill">
+    <span class="nav-icon">[%]</span> Autofill
+  </a>
+  <a href="#" class="nav-item" data-view="storage">
+    <span class="nav-icon">[&]</span> Storage
+  </a>
+  <a href="#" class="nav-item" data-view="antiforensics">
+    <span class="nav-icon">[?]</span> Anti-Forensics
+  </a>
+  <a href="#" class="nav-item" data-view="search">
+    <span class="nav-icon">[/]</span> Searches
+  </a>
+  <a href="#" class="nav-item" data-view="recovered">
+    <span class="nav-icon">[^]</span> Recovered
+  </a>
+  <a href="#" class="nav-item" data-view="favicons">
+    <span class="nav-icon">[i]</span> Favicons
+  </a>
+  <a href="#" class="nav-item" data-view="cache">
+    <span class="nav-icon">[c]</span> Cache
+  </a>
+  <a href="#" class="nav-item" data-view="prefs">
+    <span class="nav-icon">[.]</span> Preferences
+  </a>
+  <a href="#" class="nav-item" data-view="cloud">
+    <span class="nav-icon">{C}</span> Cloud Accounts
+  </a>
+  <a href="#" class="nav-item" data-view="pii">
+    <span class="nav-icon">{P}</span> PII / Secrets
+  </a>
+  <a href="#" class="nav-item" data-view="fingerprint">
+    <span class="nav-icon">{F}</span> Fingerprint
+  </a>
+  <a href="#" class="nav-item" data-view="hijack">
+    <span class="nav-icon">{H}</span> Session Hijack
+  </a>
+  <a href="#" class="nav-item" data-view="media">
+    <span class="nav-icon">{M}</span> Media History
+  </a>
+  <a href="#" class="nav-item" data-view="engagement">
+    <span class="nav-icon">{E}</span> Site Engagement
+  </a>
+  <a href="#" class="nav-item" data-view="compromised">
+    <span class="nav-icon">{X}</span> Compromised
+  </a>
+  <a href="#" class="nav-item" data-view="windows">
+    <span class="nav-icon">{W}</span> Windows Artifacts
+  </a>
+</nav>
+
+<!-- Main content area -->
+<main id="content">
+  <div id="view-overview" class="view active"></div>
+  <div id="view-timeline" class="view"></div>
+  <div id="view-credentials" class="view"></div>
+  <div id="view-cookies" class="view"></div>
+  <div id="view-history" class="view"></div>
+  <div id="view-downloads" class="view"></div>
+  <div id="view-ioc" class="view"></div>
+  <div id="view-extensions" class="view"></div>
+  <div id="view-network" class="view"></div>
+  <div id="view-sessions" class="view"></div>
+  <div id="view-autofill" class="view"></div>
+  <div id="view-storage" class="view"></div>
+  <div id="view-antiforensics" class="view"></div>
+  <div id="view-search" class="view"></div>
+  <div id="view-recovered" class="view"></div>
+  <div id="view-favicons" class="view"></div>
+  <div id="view-cache" class="view"></div>
+  <div id="view-prefs" class="view"></div>
+  <div id="view-cloud" class="view"></div>
+  <div id="view-pii" class="view"></div>
+  <div id="view-fingerprint" class="view"></div>
+  <div id="view-hijack" class="view"></div>
+  <div id="view-media" class="view"></div>
+  <div id="view-engagement" class="view"></div>
+  <div id="view-compromised" class="view"></div>
+  <div id="view-windows" class="view"></div>
+</main>
+
+<!-- Detail panel (slide-out) -->
+<div id="detail-panel" class="hidden">
+  <div class="detail-header">
+    <h3 id="detail-title">Detail</h3>
+    <button id="detail-close">[X]</button>
+  </div>
+  <div id="detail-body"></div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

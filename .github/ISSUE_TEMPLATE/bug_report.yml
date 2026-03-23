@@ -1,0 +1,97 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of the bug.
+      placeholder: What happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Run `python main.py --full --format json --out test.json`
+        2. Open dashboard with `python server.py --data test.json`
+        3. Click on Credentials tab
+        4. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs Actual Behavior
+      description: What did you expect to happen? What actually happened?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - Windows 11
+        - Windows 10
+        - macOS (Apple Silicon)
+        - macOS (Intel)
+        - Ubuntu / Debian
+        - Fedora / RHEL
+        - Arch Linux
+        - Other Linux
+    validations:
+      required: true
+
+  - type: dropdown
+    id: python
+    attributes:
+      label: Python Version
+      options:
+        - "3.14"
+        - "3.13"
+        - "3.12"
+        - "3.11"
+        - "3.10"
+        - "3.9"
+        - "3.8"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: browsers
+    attributes:
+      label: Browser(s) Being Extracted
+      options:
+        - label: Chrome
+        - label: Edge
+        - label: Brave
+        - label: Firefox
+        - label: Opera / Opera GX
+        - label: Vivaldi
+        - label: Other
+
+  - type: input
+    id: command
+    attributes:
+      label: CLI Command Used
+      placeholder: "python main.py --credentials --format json --out test.json"
+
+  - type: textarea
+    id: traceback
+    attributes:
+      label: Error Output / Traceback
+      description: Paste the full error output or traceback.
+      render: shell
+
+  - type: input
+    id: version
+    attributes:
+      label: Frostveil Version
+      placeholder: "v2.1.0"

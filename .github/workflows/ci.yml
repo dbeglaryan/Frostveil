@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.8", "3.10", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Verify imports
+        run: python -c "from modules import history, bookmarks, cookies, downloads, searches, sessions, extensions, credentials, autofill, localstorage, network_recon, anti_forensics, ioc_engine, analyzer, opsec, utils, report, engine, wal_forensics, favicon_forensics, cache_forensics, visited_links, password_audit, preference_mining, html_report, dpapi_offline, cloud_accounts, pii_scanner, fingerprint, session_hijack, media_history, hsts, site_engagement, compromised_creds, export_formats, windows_artifacts, plugin_manager, pdf_report; print('All 39 modules imported successfully')"
+
+      - name: Run tests
+        run: python -m pytest tests/ -v --tb=short
+
+      - name: Syntax check all modules
+        run: python -m py_compile main.py && python -m py_compile server.py && python -c "import py_compile, os; [py_compile.compile(f'modules/{f}', doraise=True) for f in os.listdir('modules') if f.endswith('.py')]"
+
+      - name: CLI help check
+        run: python main.py --help
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check syntax
+        run: |
+          python -m py_compile main.py
+          python -m py_compile server.py
+          for f in modules/*.py; do python -m py_compile "$f"; done
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t frostveil:test .
+      - name: Test Docker image
+        run: docker run frostveil:test --help

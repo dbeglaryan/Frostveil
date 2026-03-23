@@ -1,0 +1,135 @@
+# =============================================================================
+# Frostveil - Python Forensics Project .gitignore
+# =============================================================================
+
+# =============================================================================
+# Python Bytecode
+# =============================================================================
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+
+# =============================================================================
+# Virtual Environments
+# =============================================================================
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# =============================================================================
+# IDE and Editor Files
+# =============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# =============================================================================
+# OS Generated Files
+# =============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# =============================================================================
+# Distribution / Packaging
+# =============================================================================
+dist/
+build/
+*.egg-info/
+*.egg
+MANIFEST
+.eggs/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.dist-info/
+
+# =============================================================================
+# Test Artifacts
+# =============================================================================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# =============================================================================
+# Frostveil Output Files
+# =============================================================================
+
+# JSON output files (all *.json except package.json)
+*.json
+!package.json
+
+# CSV exports
+*.csv
+
+# Encrypted files and signatures
+*.enc
+*.sig
+
+# Log files
+*.log
+
+# NDJSON / newline-delimited JSON
+*.ndjson
+
+# Frostveil report outputs
+frostveil_report.*
+report.md
+timeline.json
+manifest.json
+evidence.json
+test*.json
+validation.json
+full.json
+
+# =============================================================================
+# Frostveil Temporary / Intermediate Files
+# =============================================================================
+frostveil_stix.json
+frostveil_bodyfile.txt
+frostveil_case.json
+frostveil_es_bulk.ndjson
+
+# =============================================================================
+# Private / Sensitive Docs
+# =============================================================================
+private/
+
+# =============================================================================
+# Explicitly NOT Ignored (tracked by git)
+# These are listed here for documentation purposes only.
+# Negation patterns below ensure they are never accidentally excluded.
+# =============================================================================
+!pyproject.toml
+!README.md
+!LICENSE
+!Dockerfile
+!.github/
+!tests/
+!plugins/example_plugin.py
+!ui/
+!modules/
+!docs/

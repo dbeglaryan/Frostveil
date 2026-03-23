@@ -1,0 +1,42 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Description
+      description: A clear description of the feature you'd like.
+      placeholder: What would you like Frostveil to do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: usecase
+    attributes:
+      label: Use Case
+      description: Describe the scenario where this feature would be useful.
+      placeholder: |
+        As a [pentester/DFIR analyst/researcher], I need to...
+        This would help because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Proposed Implementation
+      description: If you have ideas on how this could be implemented, describe them here.
+      placeholder: Optional - describe your proposed approach
+
+  - type: dropdown
+    id: willing
+    attributes:
+      label: Are you willing to submit a PR?
+      options:
+        - "Yes"
+        - "Maybe, with guidance"
+        - "No"
+    validations:
+      required: true
