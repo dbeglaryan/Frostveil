@@ -51,15 +51,19 @@ class FrostveilHandler(SimpleHTTPRequestHandler):
         elif path == "/style.css":
             self._serve_file(UI_DIR / "style.css", "text/css")
         else:
-            # Try serving from UI directory
-            safe_path = path.lstrip("/").replace("..", "")
-            file_path = UI_DIR / safe_path
-            if file_path.exists() and file_path.is_file():
-                content_type = mimetypes.guess_type(str(file_path))[0] or "application/octet-stream"
-                self._serve_file(file_path, content_type)
-            else:
-                # SPA fallback — serve index.html for client-side routing
-                self._serve_file(UI_DIR / "index.html", "text/html")
+            # Try serving from UI directory with safe path resolution
+            try:
+                file_path = (UI_DIR / path.lstrip("/")).resolve()
+                file_path.relative_to(UI_DIR.resolve())  # raises ValueError if outside UI_DIR
+                if file_path.exists() and file_path.is_file():
+                    content_type = mimetypes.guess_type(str(file_path))[0] or "application/octet-stream"
+                    self._serve_file(file_path, content_type)
+                else:
+                    # SPA fallback — serve index.html for client-side routing
+                    self._serve_file(UI_DIR / "index.html", "text/html")
+            except (ValueError, OSError):
+                # Path traversal attempt or invalid path
+                self.send_error(403, "Forbidden")
 
     def _handle_api(self, path, parsed):
         params = parse_qs(parsed.query)
