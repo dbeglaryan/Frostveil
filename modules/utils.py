@@ -1,13 +1,13 @@
 import os, sys, shutil, tempfile, hashlib, platform, getpass, socket, subprocess
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 # ---- Time helpers ----
 def utc_from_webkit(ts):
     if not ts or ts == 0:
         return None
     try:
-        return datetime.utcfromtimestamp(ts/1e6 - 11644473600).isoformat()
+        return datetime.fromtimestamp(ts/1e6 - 11644473600, tz=timezone.utc).isoformat()
     except (OSError, ValueError, OverflowError):
         return None
 
@@ -15,7 +15,7 @@ def utc_from_unix(ts):
     if not ts or ts == 0:
         return None
     try:
-        return datetime.utcfromtimestamp(ts/1e6).isoformat()
+        return datetime.fromtimestamp(ts/1e6, tz=timezone.utc).isoformat()
     except (OSError, ValueError, OverflowError):
         return None
 
@@ -36,7 +36,7 @@ def get_metadata():
         "hostname": socket.gethostname(),
         "username": getpass.getuser(),
         "os": platform.platform(),
-        "acquired_utc": datetime.utcnow().isoformat() + "Z",
+        "acquired_utc": datetime.now(timezone.utc).isoformat(),
     }
     # Extended metadata for forensic context
     try:
@@ -52,7 +52,7 @@ _log_file = "frostveil.log"
 
 def log_line(msg):
     with open(_log_file, "a", encoding="utf-8") as f:
-        f.write(f"[{datetime.utcnow().isoformat()}Z] {msg}\n")
+        f.write(f"[{datetime.now(timezone.utc).isoformat()}] {msg}\n")
 
 def progress(msg):
     print(f"[.] {msg}")
@@ -62,7 +62,7 @@ def build_manifest(meta, outputs, all_rows, errors):
     import collections
     counts = collections.Counter(r["artifact"] for r in all_rows)
     return {
-        "frostveil_version": "2.0.0",
+        "frostveil_version": "2.1.0",
         "metadata": meta,
         "outputs": {str(f): sha256_file(f) for f in outputs},
         "counts": dict(counts),
@@ -79,7 +79,7 @@ def sign_manifest(path):
         sig_data = {
             "algorithm": "HMAC-SHA256",
             "signature": sig,
-            "signed_at": datetime.utcnow().isoformat() + "Z",
+            "signed_at": datetime.now(timezone.utc).isoformat(),
             "signer": f"{getpass.getuser()}@{socket.gethostname()}",
         }
         import json

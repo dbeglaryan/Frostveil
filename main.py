@@ -74,13 +74,13 @@ BANNER = r"""
  _______ ______  _____  _______ _______ _    _ _______ _____
  |______ |_____/ |     | |______    |     \  /  |______   |   |
  |       |    \_ |_____| ______|    |      \/   |______ __|__ |_____
-                v2.0.0 — Penetration Testing Edition
+                v2.1.0 — Penetration Testing Edition
 """
 
 def main():
     ap = argparse.ArgumentParser(
         prog="frostveil",
-        description="Frostveil v2.0 — Advanced browser forensics, credential extraction, "
+        description="Frostveil v2.1 — Advanced browser forensics, credential extraction, "
                     "threat analysis, and network reconnaissance toolkit."
     )
 
@@ -195,7 +195,7 @@ def main():
 
     start_time = time.perf_counter()
     meta = utils.get_metadata()
-    utils.log_line(f"=== Frostveil v2.0 started ===")
+    utils.log_line(f"=== Frostveil v2.1 started ===")
 
     # Offline DPAPI: if user provided Windows password, set it globally
     # so the crypto module can use it for credential decryption
