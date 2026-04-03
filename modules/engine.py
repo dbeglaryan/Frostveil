@@ -62,7 +62,11 @@ def resolve_browser_type(b):
     """Map browser name to its engine type."""
     if b in ("chrome", "edge", "firefox"):
         return b
-    return "chrome"  # Brave, Opera, Vivaldi, Chromium, etc.
+    if b in ("waterfox",):
+        return "firefox"
+    if b == "safari":
+        return "safari"
+    return "chrome"  # Brave, Opera, Opera GX, Vivaldi, Chromium, Yandex, etc.
 
 def extract_all(browsers: dict, meta: dict,
                 enable_optional: set = None,
