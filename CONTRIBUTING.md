@@ -1,6 +1,6 @@
 # Contributing to Frostveil
 
-Thank you for your interest in contributing to Frostveil. Contributions of all kinds are welcome — bug fixes, new extractor modules, plugins, tests, and documentation improvements. Please check the [issue tracker](https://github.com/your-org/frostveil/issues) before starting work to avoid duplication.
+Thank you for your interest in contributing to Frostveil. Contributions of all kinds are welcome — bug fixes, new extractor modules, plugins, tests, and documentation improvements. Please check the [issue tracker](https://github.com/dbeglaryan/Frostveil/issues) before starting work to avoid duplication.
 
 ---
 
@@ -21,7 +21,7 @@ Thank you for your interest in contributing to Frostveil. Contributions of all k
 **Clone the repository:**
 
 ```bash
-git clone https://github.com/your-org/frostveil.git
+git clone https://github.com/dbeglaryan/Frostveil.git
 cd frostveil
 ```
 
@@ -212,7 +212,7 @@ PLUGIN_META = {
 
 ## Reporting Issues
 
-Use [GitHub Issues](https://github.com/your-org/frostveil/issues) to report bugs.
+Use [GitHub Issues](https://github.com/dbeglaryan/Frostveil/issues) to report bugs.
 
 Please include:
 
